@@ -17,7 +17,7 @@ The project follows a simple structure:
 - **`src/App.jsx`**: Main application component (contains the demo counter)
 - **`src/App.css`** & **`src/index.css`**: Global and component-level styles
 - **`src/assets/`**: Static assets (SVGs, images)
-- **`index.html`**: HTML template that loads the React app via `src/main.jsx`
+- **`index.html`**: HTML template that loads the React app via `src/main.jsx`. Contains a small pre-mount `<script>` that reads the saved theme from `localStorage` (falling back to `prefers-color-scheme`) and sets the `dark-mode` class on `<html>` before first paint — this prevents a light-mode flash. Keep it in sync with the theme logic in `src/App.jsx` (`getInitialIsDark`).
 - **`vite.config.js`**: Vite configuration with React plugin enabled
 
 React is configured with StrictMode in development to catch potential issues.
