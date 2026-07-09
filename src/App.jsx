@@ -4,41 +4,28 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 
+function getInitialIsDark() {
+  const saved = localStorage.getItem('theme')
+  if (saved) return saved === 'dark'
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+}
+
+function applyTheme(isDark) {
+  document.documentElement.classList.toggle('dark-mode', isDark)
+}
+
 function App() {
   const [count, setCount] = useState(0)
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(getInitialIsDark)
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme')
-    let isDark = false
-
-    if (savedTheme) {
-      isDark = savedTheme === 'dark'
-    } else {
-      isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    }
-
-    setIsDarkMode(isDark)
-    if (isDark) {
-      document.documentElement.classList.add('dark-mode')
-    } else {
-      document.documentElement.classList.remove('dark-mode')
-    }
-  }, [])
+    applyTheme(isDarkMode)
+  }, [isDarkMode])
 
   const toggleTheme = () => {
     const newIsDark = !isDarkMode
     setIsDarkMode(newIsDark)
-
-    if (newIsDark) {
-      document.documentElement.classList.add('dark-mode')
-    } else {
-      document.documentElement.classList.remove('dark-mode')
-    }
-
     localStorage.setItem('theme', newIsDark ? 'dark' : 'light')
-    console.log('Theme toggled to:', newIsDark ? 'dark' : 'light')
-    console.log('HTML classes:', document.documentElement.className)
   }
 
   return (
