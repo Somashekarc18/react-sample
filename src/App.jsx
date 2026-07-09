@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
@@ -6,9 +6,34 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [isDarkMode, setIsDarkMode] = useState(false)
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme')
+
+    if (savedTheme) {
+      const isDark = savedTheme === 'dark'
+      setIsDarkMode(isDark)
+      document.documentElement.classList.toggle('dark-mode', isDark)
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      setIsDarkMode(prefersDark)
+      document.documentElement.classList.toggle('dark-mode', prefersDark)
+    }
+  }, [])
+
+  const toggleTheme = () => {
+    const newIsDark = !isDarkMode
+    setIsDarkMode(newIsDark)
+    document.documentElement.classList.toggle('dark-mode', newIsDark)
+    localStorage.setItem('theme', newIsDark ? 'dark' : 'light')
+  }
 
   return (
     <>
+      <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+        {isDarkMode ? '☀️' : '🌙'} {isDarkMode ? 'Light' : 'Dark'}
+      </button>
       <section id="center">
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
