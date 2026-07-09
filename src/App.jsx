@@ -10,22 +10,32 @@ function App() {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme')
+    let isDark = false
 
     if (savedTheme) {
-      const isDark = savedTheme === 'dark'
-      setIsDarkMode(isDark)
-      document.documentElement.classList.toggle('dark-mode', isDark)
+      isDark = savedTheme === 'dark'
     } else {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-      setIsDarkMode(prefersDark)
-      document.documentElement.classList.toggle('dark-mode', prefersDark)
+      isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+
+    setIsDarkMode(isDark)
+    if (isDark) {
+      document.documentElement.classList.add('dark-mode')
+    } else {
+      document.documentElement.classList.remove('dark-mode')
     }
   }, [])
 
   const toggleTheme = () => {
     const newIsDark = !isDarkMode
     setIsDarkMode(newIsDark)
-    document.documentElement.classList.toggle('dark-mode', newIsDark)
+
+    if (newIsDark) {
+      document.documentElement.classList.add('dark-mode')
+    } else {
+      document.documentElement.classList.remove('dark-mode')
+    }
+
     localStorage.setItem('theme', newIsDark ? 'dark' : 'light')
     console.log('Theme toggled to:', newIsDark ? 'dark' : 'light')
     console.log('HTML classes:', document.documentElement.className)
