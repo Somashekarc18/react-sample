@@ -27,6 +27,8 @@ function App() {
     setIsDarkMode(newIsDark)
     document.documentElement.classList.toggle('dark-mode', newIsDark)
     localStorage.setItem('theme', newIsDark ? 'dark' : 'light')
+    console.log('Theme toggled to:', newIsDark ? 'dark' : 'light')
+    console.log('HTML classes:', document.documentElement.className)
   }
 
   return (
