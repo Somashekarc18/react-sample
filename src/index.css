@@ -34,7 +34,6 @@ html {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-:root.dark-mode,
 html.dark-mode {
   --text: #9ca3af;
   --text-h: #f3f4f6;
@@ -49,7 +48,6 @@ html.dark-mode {
     rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
 }
 
-:root.dark-mode #social .button-icon,
 html.dark-mode #social .button-icon {
   filter: invert(1) brightness(2);
 }
