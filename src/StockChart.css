@@ -1,0 +1,23 @@
+.stock-chart-container {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background: var(--surface-bg);
+  border: 1px solid var(--surface-border);
+}
+
+.stock-chart-container h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.vega-chart {
+  display: flex;
+  justify-content: center;
+}
+
+.vega-chart svg {
+  max-width: 100%;
+  height: auto;
+}
