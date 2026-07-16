@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PIP Progress Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-main">
+      <h1 id="app-title">PIP Progress Tracker</h1>
+      <p class="subtitle" id="app-period"></p>
+    </div>
+    <div class="header-overall">
+      <div class="overall-ring" id="overall-ring">
+        <span class="overall-pct" id="overall-pct">0%</span>
+      </div>
+      <span class="overall-label">Overall (latest)</span>
+    </div>
+  </header>
+
+  <nav class="toolbar">
+    <label class="btn" for="import-file">Import JSON</label>
+    <input type="file" id="import-file" accept="application/json,.json" hidden />
+    <button class="btn" id="export-btn">Export JSON</button>
+    <div class="checkpoint-picker">
+      <label for="checkpoint-select">Checkpoint:</label>
+      <select id="checkpoint-select"></select>
+    </div>
+    <span class="dirty-flag" id="dirty-flag" hidden>Unsaved changes</span>
+  </nav>
+
+  <main id="goals-container" class="goals-container"></main>
+
+  <section class="timeline-section">
+    <h2>Biweekly Trend</h2>
+    <div id="timeline" class="timeline"></div>
+  </section>
+
+  <footer class="app-footer">
+    <span id="last-updated"></span>
+    <span>Offline dashboard &middot; edit in-browser &middot; export to persist</span>
+  </footer>
+
+  <!-- Embedded data lets the app work from file:// without a server. Import JSON to override. -->
+  <script src="progress.data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
